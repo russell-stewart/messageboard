@@ -1,0 +1,110 @@
+<html>
+  <head>
+    
+    <style>
+      body {
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-weight: 300;
+        color: #333333;
+      }
+
+      .post {
+        border-style: solid;
+        border-width: 2px;
+        border-color: #D6D6D6;
+        border-radius: 2px;
+        text-align: left;
+        position: relative;
+        width: 90%;
+        left: 5%;
+      }
+
+      .title {
+        font-size: 31px;
+        border-bottom-style: solid;
+        border-bottom-width: 2px;
+        border-bottom-color: #D6D6D6;
+      }
+
+      .text {
+        padding: 20px;
+      }
+
+      .name {
+        padding: 20px;
+        color: #4780B8;
+      }
+
+      .profilepic {
+        position: absolute;
+        left: 90%;
+        top: 5%;
+        border-radius: 50%;
+        border-style: solid;
+        border-width: 2px;
+        border-color: #D6D6D6;
+      }
+
+
+      textarea {
+        font-size: 16px;
+        background-color: #FDFDFD;
+        color: #9F9F9F;
+        border:1px solid #9F9F9F;
+        -webkit-border-radius: 2px;
+        border-radius: 2px;
+      }
+
+      .button {
+        font-size: 16px;
+        padding: 10px;
+        border-style: solid;
+        background-color: #5394D5;
+        color: white;
+        font-weight: 100;
+        position:relative;
+        -webkit-border-radius: 2px;
+        border-radius: 2px;
+        border-color: #34618B;
+        -webkit-transition: background-color .5s;
+        transition: background-color .5s;
+      }
+
+      .button:hover {
+        font-size: 16px;
+        font-weight: 100;
+        padding: 10px;
+        border-style: solid;
+        background-color: #4984BD;
+        color: white;
+        position:relative;
+        -webkit-border-radius: 2px;
+        border-radius: 2px;
+        border-color: #34618B;
+        -webkit-transition: background-color .5s;
+        transition: background-color .5s;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class = 'title'>Message Board</div><br>
+
+    <div class = 'post'>
+      <br>
+      <form name = 'writepost' id = 'writepost'>
+
+        <textarea form = 'writepost' id = 'text' rows = '4' cols = '50' onclick = "document.getElementById('text').value = '';">
+Write your post here:
+        </textarea><br><br>
+        <button type = 'submit' value = 'Submit' class = 'button'>Submit</button>
+      </form>
+    </div><br><br>
+
+    <div class = 'post'>
+      <img class = 'profilepic' src = 'blankavatar.png'></img>
+      <div class = 'name'>Name goes here</div>
+      <div class = 'text'>Here is the text for a post.</div>
+    </div><br><br>
+  </body>
+</html>

@@ -11,11 +11,29 @@ $def with(posts)
       }
 
       .post {
-        border-style: solid;
-        border-width: 2px;
-        border-color: #D6D6D6;
+        display: block;
+        left: 0%;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        background-color: #FDFDFD;
+        -webkit-transition: box-shadow 0.5s;
+        transition: box-shadow 0.5s;
+        -webkit-border-radius: 2px;
         border-radius: 2px;
-        text-align: left;
+        position: relative;
+        width: 90%;
+        left: 5%;
+      }
+
+
+      .post:hover {
+        display: block;
+        left: 0%;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+        background-color: #FDFDFD;
+        -webkit-transition: box-shadow 0.5s;
+        transition: box-shadow 0.5s;
+        -webkit-border-radius: 2px;
+        border-radius: 2px;
         position: relative;
         width: 90%;
         left: 5%;
@@ -29,11 +47,17 @@ $def with(posts)
       }
 
       .text {
-        padding: 20px;
+        padding: 10px;
+        left: 15px;
+        display: block;
+        position: relative;
       }
 
       .name {
-        padding: 20px;
+        left: 15px;
+        display: block;
+        position: relative;
+        padding: 10px;
         color: #4780B8;
       }
 
@@ -74,8 +98,8 @@ $def with(posts)
         border-style: solid;
         font-size: 16px;
         padding: 15px;
-        background-color: #30C5D9;
-        color: #2D2D2D;
+        background-color: #5394D6;
+        color: #FFFFFF;
         width: 20%;
         position:relative;
         /*left:40%;*/
@@ -84,7 +108,7 @@ $def with(posts)
         -webkit-transition: box-shadow 0.5s;
         -webkit-border-radius: 2px;
         border-radius: 2px;
-        border-color: #30C5D9;
+        border-color: #5394D6;
       }
 
       .button:hover {
@@ -92,8 +116,9 @@ $def with(posts)
         border-style: solid;
         font-size: 16px;
         padding: 15px;
-        background-color: #30C5D9;
-        color: #2D2D2D;
+        background-color: #5394D6;
+        border-color: #5394D6;
+        color: #FFFFFF;
         width: 20%;
         position: relative;
         /*left:40%;*/
@@ -114,20 +139,25 @@ $def with(posts)
         width: 90%;
         left: 5%;
       }
+
+      #clickhere {
+        padding: 20px;
+        font-size: 20px;
+      }
     </style>
   </head>
   <body>
 
     <div class = 'title'>Message Board</div><br>
 
-    <div class = 'post'>
-      <br>
-      <form name = 'writepost' id = 'writepost'>
-
+    <div id = '1' class = 'post' style = 'text-align:center; background-color:#5394D6;'>
+      <div id = 'clickhere' onclick = "document.getElementById('writepost').style.display = 'block';document.getElementById('clickhere').style.display = 'none';">Click here to write a post.</div>
+      <form name = 'writepost' id = 'writepost' style = 'display: none;'>
+        <br>
         <textarea form = 'writepost' id = 'text' rows = '4' cols = '50' onclick = "document.getElementById('text').value = '';">
 Write your post here:
         </textarea><br><br>
-        <button type = 'submit' value = 'Submit' class = 'button'>Submit</button>
+        <button type = 'submit' value = 'Submit' class = 'button'>Submit</button><br><br>
       </form>
     </div><br><br>
 
@@ -137,13 +167,13 @@ Write your post here:
       <div class = 'name'>$post.name</div>
       <div class = 'text'>$post.text</div>
       $for comment in post.comments:<div class = 'comment'>
-        <div class = 'name' style = 'padding: 0px;'>$comment.name</div>
-        $comment.text
+        <div class = 'name'>$comment.name</div>
+        <div class = 'text'>$comment.text</div>
         </div><br>
+      <button onclick = "document.getElementById('commentbox$post').style.display = 'block';document.getElementById('button$post').style.display = 'none'"class = 'button' id = 'button$post'>Add a Comment</button>
       <form name = 'writecomment$post' id = 'writecomment$post'></form>
       <input type = 'text' style = 'display:none;' form = 'writecomment$post' id = 'commentbox$post' rows = '4' cols = '50' onclick = "document.getElementById('commentbox$post').value = '';" value = 'Write a comment'>
       </input><br><br>
-      <button onclick = "document.getElementById('commentbox$post').style.display = 'block';document.getElementById('button$post').style.display = 'none'"class = 'button' id = 'button$post'>Add a Comment</button>
       </div><br><br>
   </body>
 </html>

@@ -252,9 +252,11 @@ Write your post here:
           <div class = 'name'>$comment.name</div>
           <div class = 'text'>$comment.text</div>
           </div><br>
-          <button onclick = "document.getElementById('commentbox$post').style.display = 'block';document.getElementById('button$post').style.display = 'none'"class = 'button' id = 'button$post'>Add a Comment</button>
-          <form name = 'writecomment$post' id = 'writecomment$post'></form>
-          <input type = 'text' style = 'display:none;' form = 'writecomment$post' id = 'commentbox$post' rows = '4' cols = '50' onclick = "document.getElementById('commentbox$post').value = '';" value = 'Write a comment'>
+          <button onclick = "document.getElementById('writecomment$post').style.display = 'block';document.getElementById('button$post').style.display = 'none'"class = 'button' id = 'button$post'>Add a Comment</button>
+          <form name = 'writecomment$post' id = 'writecomment$post' style = 'display:none'>
+          <input type = 'text' form = 'writecomment$post' id = 'commentbox$post' rows = '4' cols = '50' onclick = "document.getElementById('commentbox$post').value = '';" value = 'Write a comment'>
+          <button type = 'submit' value = 'Submit' class = 'button'>Submit</button><br><br>
+          </form>
         </input><br><br>
       </div>
     </div><br><br>

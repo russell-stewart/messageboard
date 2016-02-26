@@ -29,7 +29,7 @@ class index:
         c = Comment()
         c.name = 'Bob'
         c.text = 'This should be a comment'
-        c.referenceid = -1
+        c.referenceid = 1
         comments = [c]
         p.comments = comments
         posts = [p]

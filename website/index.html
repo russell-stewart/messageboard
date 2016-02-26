@@ -256,7 +256,8 @@ Write your post here:
           </div><br>
           <button onclick = "document.getElementById('writecomment$post').style.display = 'block';document.getElementById('button$post').style.display = 'none'"class = 'button' id = 'button$post'>Add a Comment</button>
           <form  method = 'POST' enctype="multipart/form-data" action="" name = 'writecomment$post' id = 'writecomment$post' style = 'display:none'>
-          <input type = 'text' form = 'writecomment$post' id = 'commentbox$post' rows = '4' cols = '50' onclick = "document.getElementById('commentbox$post').value = '';" value = 'Write a comment'>
+          <input type = 'text' name = 'comment' form = 'writecomment$post' id = 'commentbox$post' onclick = "document.getElementById('commentbox$post').value = '';" value = 'Write a comment'></input>
+          <input type = 'text' style = 'display:none' name = 'id' form = 'writecomment$post' id = 'id$post' value = '$post.id' display = 'none'></input>
           <button type = 'submit' value = 'Submit' class = 'button'>Submit</button><br><br>
           </form>
         </input><br><br>

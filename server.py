@@ -36,8 +36,14 @@ class index:
         return render.index(posts)
     def POST(self):
         form = web.input()
-        post = form.writepost
-        print(post)
+        try:
+            post = form.writepost
+            print(post)
+        except AttributeError:
+            myid = form.id
+            comment = form.comment
+            print(comment)
+            print(myid)
         raise web.seeother('/')
 
 #main method

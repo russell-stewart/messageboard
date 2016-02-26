@@ -30,6 +30,11 @@ class index:
         p.comments = comments
         posts = [p]
         return render.index(posts)
+    def POST(self):
+        form = web.input()
+        post = form.writepost
+        print(post)
+        raise web.seeother('/')
 
 #main method
 if __name__ == '__main__':

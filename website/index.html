@@ -231,7 +231,8 @@ $def with(posts)
     <div class = 'title'>Message Board</div><br>
 
     <div id = '1' class = 'post' style = 'text-align:center; background-color:#5394D6;'>
-      <div id = 'clickhere' onclick = "document.getElementById('writepost').style.display = 'block';document.getElementById('clickhere').style.display = 'none';">Click here to write a post.</div>
+      <div id = 'clickhere' onclick = "document.getElementById('writepost').style.display = 'block';document.getElementById('clickhere').style.display = 'none'; document.getElementById('collapsebutton').style.display = 'block'">Click here to write a post.</div>
+      <div id = 'collapsebutton' class = 'redbutton' onclick = "document.getElementById('writepost').style.display = 'none'; document.getElementById('collapsebutton').style.display = 'none'; document.getElementById('clickhere').style.display = 'block';" style = 'display:none'>-</div>
       <form method = 'POST' enctype="multipart/form-data" action="" id = 'writepost' name = 'writepost' style = 'display: none;'>
         <br>
         <textarea name = 'writepost' form = 'writepost' id = 'text' rows = '4' cols = '50' onclick = "document.getElementById('text').value = '';">
@@ -244,7 +245,8 @@ Write your post here:
     $for post in posts:
       <div class = 'post'>
       <img class = 'profilepic' src = 'https://i1.wp.com/canvas.instructure.com/images/messages/avatar-50.png?ssl=1'></img>
-      <div class = 'redbutton' onclick = "document.getElementById('comments$post').style.display = 'block'">+</div>
+      <div id = 'redbutton1$post'class = 'redbutton' onclick = "document.getElementById('comments$post').style.display = 'block'; document.getElementById('redbutton$post').style.display = 'block';document.getElementById('redbutton1$post').style.display = 'none'">+</div>
+      <div id = 'redbutton$post' class = 'redbutton' onclick = "document.getElementById('comments$post').style.display = 'none'; document.getElementById('redbutton$post').style.display = 'none'; document.getElementById('redbutton1$post').style.display = 'block'" style = 'display:none'>-</div>
       <div class = 'name'>$post.name</div>
       <div class = 'text'>$post.text</div>
       <div id = 'comments$post' style = 'display:none'>

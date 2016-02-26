@@ -12,6 +12,7 @@ app = web.application(urls, globals(), True)
 class Post:
     name = ""
     text = ""
+    pic = ""
     comments = []
     myid = -1
 
@@ -25,6 +26,7 @@ class index:
         p = Post()
         p.name = 'Russell'
         p.text = 'Is this working?'
+        p.pic = 'https://kentdenver.instructure.com/images/thumbnails/15304/ckhEcjfPPMuJeUIXGPMdg7QoyNC0c6Ptd5vdGKfe'
         p.id = 1
         c = Comment()
         c.name = 'Bob'

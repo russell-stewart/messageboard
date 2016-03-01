@@ -35,10 +35,17 @@ class Comment:
 class index:
     #returns the website
     def GET(self):
-        c = Comment('Bob' , 'This should be a comment.' , 1)
-        comments = [c]
-        p = Post('Russell' , 'Is this working?' , 'https://kentdenver.instructure.com/images/thumbnails/15304/ckhEcjfPPMuJeUIXGPMdg7QoyNC0c6Ptd5vdGKfe' , comments , 1)
-        posts = [p]
+        postsdb = db.posts.find().sort('myid' , pymongo.DESCENDING)
+        posts = []
+        for post in postsdb:
+            commentsdb = db.comments.find()
+            carr = []
+            for comment in commentsdb:
+                if int(comment.get('referenceid')) == int(post.get('myid')):
+                    c = Comment(comment.get('name') , comment.get('text') , comment.get('referenceid'))
+                    carr.append(c)
+            p = Post(post.get('name') , post.get('text') , post.get('pic') , carr , post.get('myid'))
+            posts.append(p)
         return render.index(posts)
     #sees if a comment or post was submitted and handles it
     def POST(self):
@@ -52,12 +59,17 @@ class index:
             db.posts.insert_one({
                  'name' : 'should go here',
                  'text' : post,
-                 'pic' : 'should go here',
+                 'pic' : 'https://i1.wp.com/canvas.instructure.com/images/messages/avatar-50.png?ssl=1',
                  'myid' : myid})
             print(post)
         except AttributeError:
-            myid = form.myid
+            myid = form.id
             comment = form.comment
+            db.comments.insert_one({
+                'text' : comment,
+                'referenceid' : myid,
+                'name' : 'should go here'
+            })
             print(comment)
             print(myid)
 
@@ -65,16 +77,4 @@ class index:
 
 #main method
 if __name__ == '__main__':
-    c = Comment('Bob' , 'This should be a comment.' , 1)
-    comments = [c]
-    # p = Post('Russell' , 'Is this working?' , 'https://kentdenver.instructure.com/images/thumbnails/15304/ckhEcjfPPMuJeUIXGPMdg7QoyNC0c6Ptd5vdGKfe' , comments , 1)
-    # db.posts.insert_one({
-    #     'name' : p.name,
-    #     'text' : p.text,
-    #     'pic' : p.pic,
-    #     'myid' : p.myid})
-    # db.comments.insert_one({
-    #     'name' : c.name,
-    #     'text' : c.text,
-    #     'referenceid' : c.referenceid})
     app.run()

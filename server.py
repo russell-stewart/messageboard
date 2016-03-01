@@ -57,8 +57,10 @@ class index:
             myid = posts[0].get('myid') + 1
 
             db.posts.insert_one({
+                 #PLACEHOLDER FIX WHEN CANVAS WORKS
                  'name' : 'should go here',
                  'text' : post,
+                 #PLACEHOLDER FIX WHEN CANVAS WORKS
                  'pic' : 'https://i1.wp.com/canvas.instructure.com/images/messages/avatar-50.png?ssl=1',
                  'myid' : myid})
             print(post)
@@ -68,6 +70,7 @@ class index:
             db.comments.insert_one({
                 'text' : comment,
                 'referenceid' : myid,
+                #PLACEHOLDER FIX WHEN CANVAS WORKS
                 'name' : 'should go here'
             })
             print(comment)

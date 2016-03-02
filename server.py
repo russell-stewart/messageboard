@@ -5,12 +5,14 @@ import pymongo#note: you must first run this terminal command: sudo python -m pi
 from pymongo import MongoClient
 client = MongoClient('mongodb://localhost:27017')
 db = client['Messageboard']
-
+key = '7cb6d9ebd6659fed33d2d632f9c0f28d'
+oauth_nonce = []
 
 render = web.template.render('website/')
 
 urls = (
-    '/' , 'index'
+    '/' , 'index',
+    '/launch' , 'launch'
 )
 
 app = web.application(urls, globals(), True)
@@ -46,6 +48,7 @@ class index:
                     carr.append(c)
             p = Post(post.get('name') , post.get('text') , post.get('pic') , carr , post.get('myid'))
             posts.append(p)
+        web.header('X-Frame-Options' , 'ALLOW-FROM *')
         return render.index(posts)
     #sees if a comment or post was submitted and handles it
     def POST(self):
@@ -78,6 +81,29 @@ class index:
 
         raise web.seeother('/')
 
+class launch:
+    def POST(self):
+        form = web.input()
+        roles = form.roles
+        oauth_nonce.append(form.oauth_nonce)
+        if form.lti_message_type == 'basic-lti-launch-request' and form.oauth_consumer_key == key:
+            print 'new user!'
+            print 'lti_message_type: ' + form.lti_message_type
+            print 'lti_version: ' + form.lti_version
+            print 'resource_link_id: ' + form.resource_link_id
+            print 'context_id: ' + form.context_id
+            print 'user_id: ' + form.user_id
+            print 'roles: ' + form.roles
+            print 'key: ' + form.oauth_consumer_key
+            print 'oauth_nonce: ' + form.oauth_nonce
+            print 'oauth_timestamp: ' + form.oauth_timestamp
+            print 'oauth_signature: ' + form.oauth_signature
+            print 'name: ' + form.lis_person_name_full
+            print 'email: ' + form.lis_person_contact_email_primary
+            print 'image src: ' + form.user_image
+            raise web.seeother('/')
+        else:
+            raise web.seeother('http://www.beesbeesbees.com')
 #main method
 if __name__ == '__main__':
     app.run()

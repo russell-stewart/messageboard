@@ -14,8 +14,8 @@ token = 'not the token'
 
 from web.wsgiserver import CherryPyWSGIServer
 
-CherryPyWSGIServer.ssl_certificate = './etc/letsencrypt/live/kdsmessageboard.com/fullchain.pem'
-CherryPyWSGIServer.ssl_private_key = './etc/letsencrypt/live/kdsmessageboard.com/privkey.pem'
+CherryPyWSGIServer.ssl_certificate = '/etc/letsencrypt/live/kdsmessageboard.com/fullchain.pem'
+CherryPyWSGIServer.ssl_private_key = '/etc/letsencrypt/live/kdsmessageboard.com/privkey.pem'
 
 render = web.template.render('website/')
 

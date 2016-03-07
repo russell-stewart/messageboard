@@ -3,16 +3,25 @@ import web
 import pymongo#note: you must first run this terminal command: sudo python -m pip install pymongo to use this package.
 #Database setup: Create a database named messageboard. Add a collection called posts.
 from pymongo import MongoClient
+import unirest
 client = MongoClient('mongodb://localhost:27017')
 db = client['Messageboard']
-key = '7cb6d9ebd6659fed33d2d632f9c0f28d'
+key = 'f0de28e094c09589a1db004b314ed357'
 oauth_nonce = []
+client_id = 2260
+client_secret = 'c306f7d154a86ddb0f1a'
+token = 'not the token'
+
+from web.wsgiserver import CherryPyWSGIServer
+
+CherryPyWSGIServer.ssl_certificate = './etc/letsencrypt/live/kdsmessageboard.com/fullchain.pem'
+CherryPyWSGIServer.ssl_private_key = './etc/letsencrypt/live/kdsmessageboard.com/privkey.pem'
 
 render = web.template.render('website/')
 
 urls = (
     '/' , 'index',
-    '/launch' , 'launch'
+    '/launch', 'launch',
 )
 
 app = web.application(urls, globals(), True)
@@ -33,10 +42,25 @@ class Comment:
         self.text = t
         self.referenceid = r
 
+
 #the main website homepage
 class index:
     #returns the website
     def GET(self):
+        try:
+            error = web.input().error
+            print error
+            raise web.seeother('http://www.beesbeesbees.com')
+        except AttributeError:
+            code = web.input().code
+            print code
+            url = 'https://learn-lti.herokuapp.com/login/oauth2/token?client_id=' + str(client_id) + '&redirect_uri=http://0.0.0.0:8080/&client_secret=' + str(client_secret) + '&code=' + str(code)
+            print url
+            response = unirest.post(url)
+            token = response.body.get('access_token')
+            print 'token': + str(token)
+
+
         postsdb = db.posts.find().sort('myid' , pymongo.DESCENDING)
         posts = []
         for post in postsdb:
@@ -101,9 +125,14 @@ class launch:
             print 'name: ' + form.lis_person_name_full
             print 'email: ' + form.lis_person_contact_email_primary
             print 'image src: ' + form.user_image
-            raise web.seeother('/')
+            print 'service url: ' + form.lis_outcome_service_url
+
+            return render.index()
         else:
             raise web.seeother('http://www.beesbeesbees.com')
+    def GET(self):
+        url = 'https://learn-lti.herokuapp.com/login/oauth2/auth?client_id=' + str(client_id) + '&response_type=code&redirect_uri=http://0.0.0.0:8080/'
+        return web.redirect(url)
 #main method
 if __name__ == '__main__':
     app.run()

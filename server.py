@@ -14,8 +14,8 @@ token = 'not the token'
 
 from web.wsgiserver import CherryPyWSGIServer
 
-CherryPyWSGIServer.ssl_certificate = '/etc/letsencrypt/live/kdsmessageboard.com/fullchain.pem'
-CherryPyWSGIServer.ssl_private_key = '/etc/letsencrypt/live/kdsmessageboard.com/privkey.pem'
+#CherryPyWSGIServer.ssl_certificate = '/etc/letsencrypt/live/kdsmessageboard.com/fullchain.pem'
+#CherryPyWSGIServer.ssl_private_key = '/etc/letsencrypt/live/kdsmessageboard.com/privkey.pem'
 
 render = web.template.render('website/')
 
@@ -82,7 +82,10 @@ class index:
         try:
             post = form.writepost
             posts = db.posts.find().sort('myid' , pymongo.DESCENDING)
-            myid = posts[0].get('myid') + 1
+            try:
+                myid = posts[0].get('myid') + 1
+            except IndexError:
+                myid = 1
 
             db.posts.insert_one({
                  #PLACEHOLDER FIX WHEN CANVAS WORKS

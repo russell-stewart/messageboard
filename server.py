@@ -46,6 +46,8 @@ class Comment:
 #maybe this will help?
 class reload:
     def GET(self):
+        postsdb = db.posts.find().sort('myid' , pymongo.DESCENDING)
+        posts = []
         for post in postsdb:
             commentsdb = db.comments.find()
             carr = []

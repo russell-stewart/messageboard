@@ -44,7 +44,7 @@ class Comment:
         self.referenceid = r
 
 #maybe this will help?
- class reload:
+class reload:
     postsdb = db.posts.find().sort('myid' , pymongo.DESCENDING)
     posts = []
     for post in postsdb:

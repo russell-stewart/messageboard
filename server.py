@@ -52,6 +52,7 @@ class index:
             print error
             raise web.seeother('http://www.beesbeesbees.com')
         except AttributeError:
+            print web.input()
             code = web.input().code
             print code
             url = 'https://learn-lti.herokuapp.com/login/oauth2/token?client_id=' + str(client_id) + '&redirect_uri=http://0.0.0.0:8080/&client_secret=' + str(client_secret) + '&code=' + str(code)

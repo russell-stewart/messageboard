@@ -14,8 +14,8 @@ token = 'not the token'
 
 from web.wsgiserver import CherryPyWSGIServer
 
-CherryPyWSGIServer.ssl_certificate = '/etc/letsencrypt/live/kdsmessageboard.com/fullchain.pem'
-CherryPyWSGIServer.ssl_private_key = '/etc/letsencrypt/live/kdsmessageboard.com/privkey.pem'
+#CherryPyWSGIServer.ssl_certificate = '/etc/letsencrypt/live/kdsmessageboard.com/fullchain.pem'
+#CherryPyWSGIServer.ssl_private_key = '/etc/letsencrypt/live/kdsmessageboard.com/privkey.pem'
 
 render = web.template.render('website/')
 
@@ -55,7 +55,7 @@ class index:
             print web.input()
             code = web.input().code
             print code
-            url = 'https://learn-lti.herokuapp.com/login/oauth2/token?client_id=' + str(client_id) + '&redirect_uri=http://0.0.0.0:8080/&client_secret=' + str(client_secret) + '&code=' + str(code)
+            url = 'https://learn-lti.herokuapp.com/login/oauth2/token?client_id=' + str(client_id) + '&redirect_uri=https://kdsmessageboard.com:8080/&client_secret=' + str(client_secret) + '&code=' + str(code)
             print url
             response = unirest.post(url)
             token = response.body.get('access_token')
@@ -132,7 +132,7 @@ class launch:
         else:
             raise web.seeother('http://www.beesbeesbees.com')
     def GET(self):
-        url = 'https://learn-lti.herokuapp.com/login/oauth2/auth?client_id=' + str(client_id) + '&response_type=code&redirect_uri=http://0.0.0.0:8080/'
+        url = 'https://learn-lti.herokuapp.com/login/oauth2/auth?client_id=' + str(client_id) + '&response_type=code&redirect_uri=https://kdsmessageboard.com:8080/'
         return web.redirect(url)
 #main method
 if __name__ == '__main__':

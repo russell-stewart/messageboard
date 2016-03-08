@@ -43,6 +43,7 @@ class Comment:
         self.text = t
         self.referenceid = r
 
+#maybe this will help?
  class reload:
     postsdb = db.posts.find().sort('myid' , pymongo.DESCENDING)
     posts = []

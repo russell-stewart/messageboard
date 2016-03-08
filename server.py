@@ -44,19 +44,19 @@ class Comment:
         self.referenceid = r
 
  class reload:
-     postsdb = db.posts.find().sort('myid' , pymongo.DESCENDING)
-     posts = []
-     for post in postsdb:
-         commentsdb = db.comments.find()
-         carr = []
-         for comment in commentsdb:
-             if int(comment.get('referenceid')) == int(post.get('myid')):
-                 c = Comment(comment.get('name') , comment.get('text') , comment.get('referenceid'))
-                 carr.append(c)
-         p = Post(post.get('name') , post.get('text') , post.get('pic') , carr , post.get('myid'))
-         posts.append(p)
-     web.header('X-Frame-Options' , 'ALLOW-FROM *')
-     return render.index(posts)
+    postsdb = db.posts.find().sort('myid' , pymongo.DESCENDING)
+    posts = []
+    for post in postsdb:
+        commentsdb = db.comments.find()
+        carr = []
+        for comment in commentsdb:
+            if int(comment.get('referenceid')) == int(post.get('myid')):
+                c = Comment(comment.get('name') , comment.get('text') , comment.get('referenceid'))
+                carr.append(c)
+        p = Post(post.get('name') , post.get('text') , post.get('pic') , carr , post.get('myid'))
+        posts.append(p)
+    web.header('X-Frame-Options' , 'ALLOW-FROM *')
+    return render.index(posts)
 
 #the main website homepage
 class index:

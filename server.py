@@ -64,6 +64,7 @@ class reload:
 class index:
     #returns the website
     def GET(self):
+        form = web.input()
         print 'name: ' + form.lis_person_name_full
         print 'email: ' + form.lis_person_contact_email_primary
         print 'image src: ' + form.user_image

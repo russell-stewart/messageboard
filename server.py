@@ -9,7 +9,7 @@ db = client['Messageboard']
 key = 'key'
 oauth_nonce = []
 client_id = 2260
-client_secret = 'secret'
+client_secret = 'c306f7d154a86ddb0f1a'
 token = 'not the token'
 
 from web.wsgiserver import CherryPyWSGIServer
@@ -160,4 +160,4 @@ class launch:
         return web.redirect(url)
 #main method
 if __name__ == '__main__':
-    app.run()
+    app.run(port=443)

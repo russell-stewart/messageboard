@@ -9,7 +9,7 @@ db = client['Messageboard']
 key = 'key'
 oauth_nonce = []
 client_id = 2260
-client_secret = 'secret'
+client_secret = 'c306f7d154a86ddb0f1a'
 token = 'not the token'
 
 from web.wsgiserver import CherryPyWSGIServer

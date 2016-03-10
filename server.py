@@ -6,10 +6,10 @@ from pymongo import MongoClient
 import unirest
 client = MongoClient('mongodb://localhost:27017')
 db = client['Messageboard']
-key = 'f0de28e094c09589a1db004b314ed357'
+key = '08bbbeaad93ed5aebe3c03b51e83b223'
 oauth_nonce = []
 client_id = 2260
-client_secret = 'c306f7d154a86ddb0f1a'
+client_secret = '65b8927162b59df7075645d4ddaee5fb'
 token = 'not the token'
 
 from web.wsgiserver import CherryPyWSGIServer

@@ -74,14 +74,14 @@ class index:
             print error
             raise web.seeother('http://www.beesbeesbees.com')
         except AttributeError:
-            print web.input()
-            code = web.input().code
-            print code
-            url = 'https://learn-lti.herokuapp.com/login/oauth2/token?client_id=' + str(client_id) + '&redirect_uri=https://kdsmessageboard.com:8080/&client_secret=' + str(client_secret) + '&code=' + str(code)
-            print url
-            response = unirest.post(url)
-            token = response.body.get('access_token')
-            print 'token:' + str(token)
+            # print web.input()
+            # code = web.input().code
+            # print code
+            # url = 'https://learn-lti.herokuapp.com/login/oauth2/token?client_id=' + str(client_id) + '&redirect_uri=https://kdsmessageboard.com:8080/&client_secret=' + str(client_secret) + '&code=' + str(code)
+            # print url
+            # response = unirest.post(url)
+            # token = response.body.get('access_token')
+            # print 'token:' + str(token)
 
 
         postsdb = db.posts.find().sort('myid' , pymongo.DESCENDING)

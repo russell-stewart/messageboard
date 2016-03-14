@@ -152,7 +152,9 @@ class launch:
             print 'email: ' + form.lis_person_contact_email_primary
             print 'image src: ' + form.user_image
 
-            return render.index()
+            #return render.index()
+            raise web.seeother('/index')
+
         else:
             raise web.seeother('http://www.beesbeesbees.com')
     def GET(self):

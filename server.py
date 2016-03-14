@@ -132,7 +132,9 @@ class index:
             print(comment)
             print(myid)
 
-        raise web.seeother('/')
+        query = '/?name=' + str(name) + '&email=' + str(email) + "&pic=" + str(pic)
+        print query
+        raise web.seeother(query)
 
 class launch:
     def POST(self):

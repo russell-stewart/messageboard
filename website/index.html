@@ -242,9 +242,9 @@ $def with(posts , name , pic , email)
         <textarea name = 'writepost' form = 'writepost' id = 'text' rows = '4' cols = '50' onclick = "document.getElementById('text').value = '';">
 Write your post here:
         </textarea><br><br>
-        <input type = 'text' display = 'none' name = 'name'>$name</input>
-        <input type = 'text' display = 'none' name = 'pic'>$pic</input>
-        <input type = 'text' display = 'none' name = 'email'>$email</input>
+        <input type = 'text' style = 'display:none' name = 'name'>$name</input>
+        <input type = 'text' style = 'display:none' name = 'pic'>$pic</input>
+        <input type = 'text' style = 'display:none' name = 'email'>$email</input>
         <button type = 'submit' value = 'Submit' class = 'button' style = 'background-color:#FDFDFD;border-color:#FDFDFD;color:#333333;'>Submit</button><br><br>
       </form>
     </div><br><br>
@@ -263,9 +263,9 @@ Write your post here:
           <form  method = 'POST' enctype="multipart/form-data" action="" name = 'writecomment$post' id = 'writecomment$post' style = 'display:none'>
           <input type = 'text' name = 'comment' form = 'writecomment$post' id = 'commentbox$post' onclick = "document.getElementById('commentbox$post').value = '';" value = 'Write a comment'></input>
           <input type = 'text' style = 'display:none' name = 'id' form = 'writecomment$post' id = 'id$post' value = '$post.myid' display = 'none'></input>
-          <input type = 'text' display = 'none' name = 'name'>$name</input>
-          <input type = 'text' display = 'none' name = 'pic'>$pic</input>
-          <input type = 'text' display = 'none' name = 'email'>$email</input>
+          <input type = 'text' style = 'display:none' name = 'name'>$name</input>
+          <input type = 'text' style = 'display:none' name = 'pic'>$pic</input>
+          <input type = 'text' style = 'display:none' name = 'email'>$email</input>
           <button type = 'submit' value = 'Submit' class = 'button'>Submit</button><br><br>
           </form>
           <button onclick = "document.getElementById('writecomment$post').style.display = 'block';document.getElementById('button$post').style.display = 'none'"class = 'button' id = 'button$post'>Add a Comment</button><br><br>

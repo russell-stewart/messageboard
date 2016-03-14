@@ -151,12 +151,17 @@ class launch:
             # print 'oauth_nonce: ' + form.oauth_nonce
             # print 'oauth_timestamp: ' + form.oauth_timestamp
             # print 'oauth_signature: ' + form.oauth_signature
-            print 'name: ' + form.lis_person_name_full
-            print 'email: ' + form.lis_person_contact_email_primary
-            print 'image src: ' + form.user_image
+            name = form.lis_person_name_full
+            print name
+            email = form.lis_person_contact_email_primary
+            print email
+            pic = form.user_image
+            print pic
 
             #return render.index()
-            raise web.seeother('/')
+            query = '/?name=' + str(name) + '&email=' + str(email) + "&pic=" + str(pic)
+            print query
+            raise web.seeother(query)
 
         else:
             raise web.seeother('http://www.beesbeesbees.com')

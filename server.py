@@ -113,11 +113,10 @@ class index:
                 myid = 1
 
             db.posts.insert_one({
-                 #PLACEHOLDER FIX WHEN CANVAS WORKS
-                 'name' : 'should go here',
+                 'name' : name,
                  'text' : post,
-                 #PLACEHOLDER FIX WHEN CANVAS WORKS
-                 'pic' : 'https://i1.wp.com/canvas.instructure.com/images/messages/avatar-50.png?ssl=1',
+                 'pic' : pic,
+                 #'pic' : 'https://i1.wp.com/canvas.instructure.com/images/messages/avatar-50.png?ssl=1',
                  'myid' : myid})
             print(post)
         except AttributeError:
@@ -126,8 +125,7 @@ class index:
             db.comments.insert_one({
                 'text' : comment,
                 'referenceid' : myid,
-                #PLACEHOLDER FIX WHEN CANVAS WORKS
-                'name' : 'should go here'
+                'name' : name
             })
             print(comment)
             print(myid)

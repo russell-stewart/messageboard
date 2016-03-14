@@ -14,15 +14,16 @@ token = 'not the token'
 
 from web.wsgiserver import CherryPyWSGIServer
 
-CherryPyWSGIServer.ssl_certificate = '/etc/letsencrypt/live/kdsmessageboard.com/fullchain.pem'
-CherryPyWSGIServer.ssl_private_key = '/etc/letsencrypt/live/kdsmessageboard.com/privkey.pem'
+#CherryPyWSGIServer.ssl_certificate = '/etc/letsencrypt/live/kdsmessageboard.com/fullchain.pem'
+#CherryPyWSGIServer.ssl_private_key = '/etc/letsencrypt/live/kdsmessageboard.com/privkey.pem'
 
 render = web.template.render('website/')
 
 urls = (
     '/' , 'index',
     '/launch', 'launch',
-    '/reload' , 'reload'
+    '/reload' , 'reload',
+    '/config' , 'config'
 )
 
 app = web.application(urls, globals(), True)
@@ -137,20 +138,19 @@ class launch:
         oauth_nonce.append(form.oauth_nonce)
         if form.lti_message_type == 'basic-lti-launch-request' and form.oauth_consumer_key == key:
             print 'new user!'
-            print 'lti_message_type: ' + form.lti_message_type
-            print 'lti_version: ' + form.lti_version
-            print 'resource_link_id: ' + form.resource_link_id
-            print 'context_id: ' + form.context_id
-            print 'user_id: ' + form.user_id
-            print 'roles: ' + form.roles
-            print 'key: ' + form.oauth_consumer_key
-            print 'oauth_nonce: ' + form.oauth_nonce
-            print 'oauth_timestamp: ' + form.oauth_timestamp
-            print 'oauth_signature: ' + form.oauth_signature
+            # print 'lti_message_type: ' + form.lti_message_type
+            # print 'lti_version: ' + form.lti_version
+            # print 'resource_link_id: ' + form.resource_link_id
+            # print 'context_id: ' + form.context_id
+            # print 'user_id: ' + form.user_id
+            # print 'roles: ' + form.roles
+            # print 'key: ' + form.oauth_consumer_key
+            # print 'oauth_nonce: ' + form.oauth_nonce
+            # print 'oauth_timestamp: ' + form.oauth_timestamp
+            # print 'oauth_signature: ' + form.oauth_signature
             print 'name: ' + form.lis_person_name_full
             print 'email: ' + form.lis_person_contact_email_primary
             print 'image src: ' + form.user_image
-            print 'service url: ' + form.lis_outcome_service_url
 
             return render.index()
         else:
@@ -158,6 +158,13 @@ class launch:
     def GET(self):
         url = 'https://learn-lti.herokuapp.com/login/oauth2/auth?client_id=' + str(client_id) + '&response_type=code&redirect_uri=https://kdsmessageboard.com:8080/'
         return web.redirect(url)
+
+class config:
+    def GET(self):
+        web.header('Content-Type', 'text/xml')
+        return render.config()
+
+
 #main method
 if __name__ == '__main__':
     app.run()

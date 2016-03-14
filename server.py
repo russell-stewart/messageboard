@@ -82,6 +82,7 @@ class index:
             # response = unirest.post(url)
             # token = response.body.get('access_token')
             # print 'token:' + str(token)
+            print 'error'
 
 
         postsdb = db.posts.find().sort('myid' , pymongo.DESCENDING)

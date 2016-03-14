@@ -153,7 +153,7 @@ class launch:
             print 'image src: ' + form.user_image
 
             #return render.index()
-            raise web.seeother('/index')
+            raise web.seeother('/')
 
         else:
             raise web.seeother('http://www.beesbeesbees.com')

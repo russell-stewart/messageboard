@@ -99,13 +99,16 @@ class index:
             p = Post(post.get('name') , post.get('text') , post.get('pic') , carr , post.get('myid'))
             posts.append(p)
         web.header('X-Frame-Options' , 'ALLOW-FROM *')
-        return render.index(posts)
+        return render.index(posts , name , pic , email)
     #sees if a comment or post was submitted and handles it
     def POST(self):
         form = web.input()
         print('hi')
         try:
             post = form.writepost
+            name = form.name
+            email = form.email
+            pic = form.pic
             posts = db.posts.find().sort('myid' , pymongo.DESCENDING)
             try:
                 myid = posts[0].get('myid') + 1
@@ -122,6 +125,9 @@ class index:
         except AttributeError:
             myid = form.id
             comment = form.comment
+            name = form.name
+            email = form.email
+            pic = form.pic
             db.comments.insert_one({
                 'text' : comment,
                 'referenceid' : myid,

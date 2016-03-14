@@ -66,9 +66,9 @@ class index:
     #returns the website
     def GET(self):
         form = web.input()
-        name = form.lis_person_name_full
-        email = form.lis_person_contact_email_primary
-        pic = form.user_image
+        name = form.name
+        email = form.email
+        pic = form.pic
         print name
 
         try:

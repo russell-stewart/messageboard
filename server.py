@@ -130,7 +130,7 @@ class index:
             print(comment)
             print(myid)
 
-        raise web.seeother('/reload')
+        raise web.seeother('/')
 
 class launch:
     def POST(self):

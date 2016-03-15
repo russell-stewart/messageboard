@@ -183,7 +183,7 @@ class admin:
         pic = form.pic
         try:
             post = form.writepost
-            
+
             posts = db.posts.find().sort('myid' , pymongo.DESCENDING)
             try:
                 myid = posts[0].get('myid') + 1
@@ -213,6 +213,7 @@ class admin:
             print 'error'
         try:
             myid = form.deleteid
+            print 'myid:' + str(myid)
             result = db.posts.delete_many({'myid':myid})
         except AttributeError:
             print 'error'

@@ -211,7 +211,7 @@ class admin:
             print 'error'
         try:
             myid = form.deleteid
-            raise web.seeother('http://www.beesbeesbees.com')
+            raise web.seeother('https://www.google.com')
             result = db.posts.delete_many({'myid':myid})
         except AttributeError:
             print 'error'

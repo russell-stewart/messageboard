@@ -204,6 +204,7 @@ class admin:
             name = form.name
             email = form.email
             pic = form.pic
+            name = form.name
             db.comments.insert_one({
                 'text' : comment,
                 'referenceid' : myid,
@@ -230,7 +231,7 @@ class admin:
             print 'error'
 
 
-        query = '/?name=' + str(name) + '&email=' + str(email) + "&pic=" + str(pic)
+        query = '/admin?name=' + str(name) + '&email=' + str(email) + "&pic=" + str(pic)
         print query
         raise web.seeother(query)
 

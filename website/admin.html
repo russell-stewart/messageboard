@@ -273,6 +273,10 @@ $def with(posts , name , pic , email)
         <form method = 'POST' enctype="multipart/form-data" action="" name = 'delete$post' id = 'delete$post'>
         <div class = 'name'>
           $post.name
+          <input type = 'text' style = 'display:none' name = 'name'  value = '$name'></input>
+          <input type = 'text' style = 'display:none' name = 'pic'  value = '$pic'></input>
+          <input type = 'text' style = 'display:none' name = 'email'  value = '$email'></input>
+          
           <input type = 'text' style = 'display:none' name = 'deleteid'  value = '$post.myid' style = 'display:none'></input>
           <button type = 'submit' value = '(Delete This)' class = 'delete'>(Delete This)</button>
         </div>
@@ -284,6 +288,10 @@ $def with(posts , name , pic , email)
               <form method = 'POST' enctype="multipart/form-data" action="" name = 'delete$comment' id = 'delete$comment'>
               <div class = 'name'>
                 $comment.name
+                <input type = 'text' style = 'display:none' name = 'name'  value = '$name'></input>
+                <input type = 'text' style = 'display:none' name = 'pic'  value = '$pic'></input>
+                <input type = 'text' style = 'display:none' name = 'email'  value = '$email'></input>
+
                 <input type = 'text' style = 'display:none' name = 'deletename'  value = '$comment.name' style = 'display:none'></input>
                 <input type = 'text' style = 'display:none' name = 'deletereferenceid'  value = '$comment.referenceid' style = 'display:none'></input>
                 <input type = 'text' style = 'display:none' name = 'deletetext'  value = '$comment.text' style = 'display:none'></input>

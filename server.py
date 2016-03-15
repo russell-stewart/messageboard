@@ -178,11 +178,12 @@ class admin:
     def POST(self):
         form = web.input()
         print('hi')
+        name = form.name
+        email = form.email
+        pic = form.pic
         try:
             post = form.writepost
-            name = form.name
-            email = form.email
-            pic = form.pic
+            
             posts = db.posts.find().sort('myid' , pymongo.DESCENDING)
             try:
                 myid = posts[0].get('myid') + 1
@@ -201,10 +202,7 @@ class admin:
         try:
             myid = form.id
             comment = form.comment
-            name = form.name
-            email = form.email
-            pic = form.pic
-            name = form.name
+
             db.comments.insert_one({
                 'text' : comment,
                 'referenceid' : myid,

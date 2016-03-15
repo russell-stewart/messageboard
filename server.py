@@ -214,14 +214,14 @@ class admin:
             print 'error'
         try:
             myid = form.deleteid
-            result = db.posts.delete({'myid':myid})
+            result = db.posts.delete_many({'myid':myid})
         except AttributeError:
             print 'error'
         try:
             referenceid = form.deletereferenceid
             text = form.deletetext
             name = form.deletename
-            result = db.comments.delete({
+            result = db.comments.delete_many({
                 'referenceid' : referenceid,
                 'text' : text,
                 'name' : name})

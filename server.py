@@ -173,7 +173,7 @@ class admin:
             p = Post(post.get('name') , post.get('text') , post.get('pic') , carr , post.get('myid'))
             posts.append(p)
         web.header('X-Frame-Options' , 'ALLOW-FROM *')
-        return render.index(posts , name , pic , email)
+        return render.admin(posts , name , pic , email)
     #sees if a comment or post was submitted and handles it
     def POST(self):
         form = web.input()
@@ -265,7 +265,7 @@ class launch:
                 query = '/admin?name=' + str(name) + '&email=' + str(email) + "&pic=" + str(pic)
                 print query
                 raise web.seeother(query)
-                
+
         else:
             raise web.seeother('http://www.beesbeesbees.com')
     def GET(self):

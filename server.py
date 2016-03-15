@@ -23,7 +23,8 @@ urls = (
     '/' , 'index',
     '/launch', 'launch',
     '/reload' , 'reload',
-    '/config' , 'config'
+    '/config' , 'config',
+    '/admin' , 'admin'
 )
 
 app = web.application(urls, globals(), True)
@@ -44,22 +45,22 @@ class Comment:
         self.text = t
         self.referenceid = r
 
-#maybe this will help?
-class reload:
-    def GET(self):
-        postsdb = db.posts.find().sort('myid' , pymongo.DESCENDING)
-        posts = []
-        for post in postsdb:
-            commentsdb = db.comments.find()
-            carr = []
-            for comment in commentsdb:
-                if int(comment.get('referenceid')) == int(post.get('myid')):
-                    c = Comment(comment.get('name') , comment.get('text') , comment.get('referenceid'))
-                    carr.append(c)
-            p = Post(post.get('name') , post.get('text') , post.get('pic') , carr , post.get('myid'))
-            posts.append(p)
-        web.header('X-Frame-Options' , 'ALLOW-FROM *')
-        return render.index(posts)
+#depracated
+# class reload:
+#     def GET(self):
+#         postsdb = db.posts.find().sort('myid' , pymongo.DESCENDING)
+#         posts = []
+#         for post in postsdb:
+#             commentsdb = db.comments.find()
+#             carr = []
+#             for comment in commentsdb:
+#                 if int(comment.get('referenceid')) == int(post.get('myid')):
+#                     c = Comment(comment.get('name') , comment.get('text') , comment.get('referenceid'))
+#                     carr.append(c)
+#             p = Post(post.get('name') , post.get('text') , post.get('pic') , carr , post.get('myid'))
+#             posts.append(p)
+#         web.header('X-Frame-Options' , 'ALLOW-FROM *')
+#         return render.index(posts)
 
 #the main website homepage
 class index:
@@ -140,6 +141,95 @@ class index:
         print query
         raise web.seeother(query)
 
+#the main website homepage
+class admin:
+    #returns the website
+    def GET(self):
+        form = web.input()
+        name = form.name
+        email = form.email
+        pic = form.pic
+        print name
+
+        try:
+            error = web.input().error
+            print error
+            raise web.seeother('http://www.beesbeesbees.com')
+        except AttributeError:
+            if any(char.isdigit() for char in email) and email != 'rstewart16@kentdenver.org' and email != 'slevy16@kentdenver.org':
+                raise web.seeother('http://www.beesbeesbees.com')
+            print 'error'
+
+
+        postsdb = db.posts.find().sort('myid' , pymongo.DESCENDING)
+        posts = []
+        for post in postsdb:
+            commentsdb = db.comments.find()
+            carr = []
+            for comment in commentsdb:
+                if int(comment.get('referenceid')) == int(post.get('myid')):
+                    c = Comment(comment.get('name') , comment.get('text') , comment.get('referenceid'))
+                    carr.append(c)
+            p = Post(post.get('name') , post.get('text') , post.get('pic') , carr , post.get('myid'))
+            posts.append(p)
+        web.header('X-Frame-Options' , 'ALLOW-FROM *')
+        return render.index(posts , name , pic , email)
+    #sees if a comment or post was submitted and handles it
+    def POST(self):
+        form = web.input()
+        print('hi')
+        try:
+            post = form.writepost
+            name = form.name
+            email = form.email
+            pic = form.pic
+            posts = db.posts.find().sort('myid' , pymongo.DESCENDING)
+            try:
+                myid = posts[0].get('myid') + 1
+            except IndexError:
+                myid = 1
+
+            db.posts.insert_one({
+                 'name' : name,
+                 'text' : post,
+                 'pic' : pic,
+                 #'pic' : 'https://i1.wp.com/canvas.instructure.com/images/messages/avatar-50.png?ssl=1',
+                 'myid' : myid})
+            print(post)
+        except AttributeError:
+            myid = form.id
+            comment = form.comment
+            name = form.name
+            email = form.email
+            pic = form.pic
+            db.comments.insert_one({
+                'text' : comment,
+                'referenceid' : myid,
+                'name' : name})
+            print(comment)
+            print(myid)
+        try:
+            myid = form.deleteid
+            result = db.posts.delete({'myid':myid})
+        except AttributeError:
+            print 'error'
+        try:
+            referenceid = form.deletereferenceid
+            text = form.deletetext
+            name = form.deletename
+            result = db.comments.delete({
+                'referenceid' : referenceid,
+                'text' : text,
+                'name' : name})
+
+        except AttributeError:
+            print 'error'
+
+
+        query = '/?name=' + str(name) + '&email=' + str(email) + "&pic=" + str(pic)
+        print query
+        raise web.seeother(query)
+
 class launch:
     def POST(self):
         form = web.input()
@@ -165,10 +255,17 @@ class launch:
             print pic
 
             #return render.index()
-            query = '/?name=' + str(name) + '&email=' + str(email) + "&pic=" + str(pic)
-            print query
-            raise web.seeother(query)
 
+
+            if any(char.isdigit() for char in email) and email != 'rstewart16@kentdenver.org' and email != 'slevy16@kentdenver.org':
+                query = '/?name=' + str(name) + '&email=' + str(email) + "&pic=" + str(pic)
+                print query
+                raise web.seeother(query)
+            else:
+                query = '/admin?name=' + str(name) + '&email=' + str(email) + "&pic=" + str(pic)
+                print query
+                raise web.seeother(query)
+                
         else:
             raise web.seeother('http://www.beesbeesbees.com')
     def GET(self):

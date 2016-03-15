@@ -183,13 +183,11 @@ class admin:
         pic = form.pic
         try:
             post = form.writepost
-
             posts = db.posts.find().sort('myid' , pymongo.DESCENDING)
             try:
                 myid = posts[0].get('myid') + 1
             except IndexError:
                 myid = 1
-
             db.posts.insert_one({
                  'name' : name,
                  'text' : post,
@@ -229,8 +227,7 @@ class admin:
         except AttributeError:
             print 'error'
 
-        print 'deleteid:'
-        print str(form.deleteid)
+        
         query = '/admin?name=' + str(name) + '&email=' + str(email) + "&pic=" + str(pic)
         print query
         raise web.seeother(query)

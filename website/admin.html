@@ -258,8 +258,7 @@ $def with(posts , name , pic , email)
       <div id = 'collapsebutton' class = 'redbutton' onclick = "document.getElementById('writepost').style.display = 'none'; document.getElementById('collapsebutton').style.display = 'none'; document.getElementById('clickhere').style.display = 'block';" style = 'display:none'>-</div>
       <form method = 'POST' enctype="multipart/form-data" action="" id = 'writepost' name = 'writepost' style = 'display: none;'>
         <br>
-        <textarea name = 'writepost' form = 'writepost' id = 'text' rows = '6' cols = '40' onclick = "x = document.getElementById('text').value; if(x == 'Write your post here:') document.getElementById('text').value = '';">
-          Write your post here:</textarea><br><br>
+        <textarea name = 'writepost' form = 'writepost' id = 'text' rows = '6' cols = '40' onclick = "x = document.getElementById('text').value; if(x == 'Write your post here:') document.getElementById('text').value = '';">Write your post here:</textarea><br><br>
         <input type = 'text' style = 'display:none' name = 'name' value = '$name'></input>
         <input type = 'text' style = 'display:none' name = 'pic' value = '$pic'></input>
         <input type = 'text' style = 'display:none' name = 'email'  value = '$email'></input>

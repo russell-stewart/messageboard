@@ -211,8 +211,8 @@ class admin:
             print 'error'
         try:
             myid = form.deleteid
-            raise web.seeother('/config')
-            result = db.posts.delete_many({'myid':myid})
+
+            result = db.posts.delete_one({'myid':myid})
         except AttributeError:
             print 'error'
         try:

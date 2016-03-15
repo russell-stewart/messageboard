@@ -229,7 +229,7 @@ class admin:
         except AttributeError:
             print 'error'
 
-
+        print form.deleteid
         query = '/admin?name=' + str(name) + '&email=' + str(email) + "&pic=" + str(pic)
         print query
         raise web.seeother(query)

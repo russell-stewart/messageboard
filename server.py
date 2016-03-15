@@ -197,6 +197,8 @@ class admin:
                  'myid' : myid})
             print(post)
         except AttributeError:
+            print 'error'
+        try:
             myid = form.id
             comment = form.comment
             name = form.name
@@ -208,6 +210,8 @@ class admin:
                 'name' : name})
             print(comment)
             print(myid)
+        except AttributeError:
+            print 'error'
         try:
             myid = form.deleteid
             result = db.posts.delete({'myid':myid})

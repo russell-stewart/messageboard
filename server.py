@@ -30,7 +30,7 @@ urls = (
 
 app = web.application(urls, globals(), True)
 
-class Bees:
+class bees:
     def GET(self):
         return render.bees()
 

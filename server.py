@@ -198,7 +198,6 @@ class admin:
             sticky = form.sticky
         except AttributeError:
             sticky = 'off'
-        print 'sticky: ' + str(form.sticky)
         try:
             post = form.writepost
             posts = db.posts.find().sort('myid' , pymongo.DESCENDING)

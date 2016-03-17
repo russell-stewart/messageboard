@@ -181,6 +181,8 @@ class admin:
         name = form.name
         email = form.email
         pic = form.pic
+        sticky = form.sticky
+        print 'sticky: ' + str(form.sticky)
         try:
             post = form.writepost
             posts = db.posts.find().sort('myid' , pymongo.DESCENDING)
@@ -193,7 +195,8 @@ class admin:
                  'text' : post,
                  'pic' : pic,
                  #'pic' : 'https://i1.wp.com/canvas.instructure.com/images/messages/avatar-50.png?ssl=1',
-                 'myid' : myid})
+                 'myid' : myid,
+                 'sticky' : sticky})
             print(post)
         except AttributeError:
             print 'insert post error'

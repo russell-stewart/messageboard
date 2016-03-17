@@ -24,10 +24,14 @@ urls = (
     '/launch', 'launch',
     '/reload' , 'reload',
     '/config' , 'config',
-    '/admin' , 'admin'
+    '/admin' , 'admin',
+    '/bees' , 'bees'
 )
 
 app = web.application(urls, globals(), True)
+
+class Bees:
+    return render.bees()
 
 #a class for organizing posts
 class Post:

@@ -196,7 +196,7 @@ class admin:
                  'myid' : myid})
             print(post)
         except AttributeError:
-            print 'error'
+            print 'insert post error'
         try:
             myid = form.id
             comment = form.comment
@@ -208,14 +208,14 @@ class admin:
             print(comment)
             print(myid)
         except AttributeError:
-            print 'error'
+            print 'insert comment error'
         try:
             print 'myid:'
             myid = form.deleteid
             print myid
-            result = db.posts.delete_one({'myid':myid})
+            result = db.posts.delete_many({'myid':myid})
         except AttributeError:
-            print 'error'
+            print 'delete post error'
         try:
             referenceid = form.deletereferenceid
             text = form.deletetext
@@ -226,7 +226,7 @@ class admin:
                 'name' : name})
 
         except AttributeError:
-            print 'error'
+            print 'delete comment error'
 
 
         query = '/admin?name=' + str(name) + '&email=' + str(email) + "&pic=" + str(pic)

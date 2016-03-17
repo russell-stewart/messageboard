@@ -114,7 +114,7 @@ class index:
             posts.append(p)
 
         web.header('X-Frame-Options' , 'ALLOW-FROM *')
-        return render.admin(posts , name , pic , email)
+        return render.index(posts , name , pic , email)
     #sees if a comment or post was submitted and handles it
     def POST(self):
         form = web.input()

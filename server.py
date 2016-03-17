@@ -76,7 +76,7 @@ class index:
         try:
             error = web.input().error
             print error
-            raise web.seeother('http://www.beesbeesbees.com')
+            raise web.seeother('/bees')
         except AttributeError:
             # print web.input()
             # code = web.input().code
@@ -169,10 +169,10 @@ class admin:
         try:
             error = web.input().error
             print error
-            raise web.seeother('http://www.beesbeesbees.com')
+            raise web.seeother('/bees')
         except AttributeError:
             if any(char.isdigit() for char in email) and email != 'slevy16@kentdenver.org' and email != 'rstewart16@kentdenver.org' or email == 'aclement@kentdenver.org':
-                raise web.seeother('http://www.beesbeesbees.com')
+                raise web.seeother('/bees')
             print 'error'
 
         posts = []
@@ -302,7 +302,7 @@ class launch:
                 raise web.seeother(query)
 
         else:
-            raise web.seeother('http://www.beesbeesbees.com')
+            raise web.seeother('/bees')
     def GET(self):
         url = 'https://learn-lti.herokuapp.com/login/oauth2/auth?client_id=' + str(client_id) + '&response_type=code&redirect_uri=https://kdsmessageboard.com:8080/'
         return web.redirect(url)

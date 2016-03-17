@@ -31,12 +31,13 @@ app = web.application(urls, globals(), True)
 
 #a class for organizing posts
 class Post:
-    def __init__(self , n , t , p , c , m):
+    def __init__(self , n , t , p , c , m , s):
         self.name = n
         self.text = t
         self.pic = p
         self.comments = c
         self.myid = m
+        self.sticky = s
 
 #a class for organizing comments
 class Comment:
@@ -98,7 +99,7 @@ class index:
                 if int(comment.get('referenceid')) == int(post.get('myid')):
                     c = Comment(comment.get('name') , comment.get('text') , comment.get('referenceid'))
                     carr.append(c)
-            p = Post(post.get('name') , post.get('text') , post.get('pic') , carr , post.get('myid'))
+            p = Post(post.get('name') , post.get('text') , post.get('pic') , carr , post.get('myid') , post.get('sticky'))
             posts.append(p)
 
         postsdb = db.posts.find({'sticky':'off'}).sort('myid' , pymongo.DESCENDING)
@@ -109,7 +110,7 @@ class index:
                 if int(comment.get('referenceid')) == int(post.get('myid')):
                     c = Comment(comment.get('name') , comment.get('text') , comment.get('referenceid'))
                     carr.append(c)
-            p = Post(post.get('name') , post.get('text') , post.get('pic') , carr , post.get('myid'))
+            p = Post(post.get('name') , post.get('text') , post.get('pic') , carr , post.get('myid') , post.get('sticky'))
             posts.append(p)
 
         web.header('X-Frame-Options' , 'ALLOW-FROM *')
@@ -184,7 +185,7 @@ class admin:
                 if int(comment.get('referenceid')) == int(post.get('myid')):
                     c = Comment(comment.get('name') , comment.get('text') , comment.get('referenceid'))
                     carr.append(c)
-            p = Post(post.get('name') , post.get('text') , post.get('pic') , carr , post.get('myid'))
+            p = Post(post.get('name') , post.get('text') , post.get('pic') , carr , post.get('myid') , post.get('sticky'))
             posts.append(p)
 
         postsdb = db.posts.find({'sticky':'off'}).sort('myid' , pymongo.DESCENDING)
@@ -195,7 +196,7 @@ class admin:
                 if int(comment.get('referenceid')) == int(post.get('myid')):
                     c = Comment(comment.get('name') , comment.get('text') , comment.get('referenceid'))
                     carr.append(c)
-            p = Post(post.get('name') , post.get('text') , post.get('pic') , carr , post.get('myid'))
+            p = Post(post.get('name') , post.get('text') , post.get('pic') , carr , post.get('myid') , post.get('sticky'))
             posts.append(p)
 
         web.header('X-Frame-Options' , 'ALLOW-FROM *')

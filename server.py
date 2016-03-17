@@ -121,7 +121,8 @@ class index:
                  'text' : post,
                  'pic' : pic,
                  #'pic' : 'https://i1.wp.com/canvas.instructure.com/images/messages/avatar-50.png?ssl=1',
-                 'myid' : myid})
+                 'myid' : myid,
+                 'sticky' : 'off'})
             print(post)
         except AttributeError:
             myid = form.id
@@ -156,13 +157,13 @@ class admin:
             print error
             raise web.seeother('http://www.beesbeesbees.com')
         except AttributeError:
-            if any(char.isdigit() for char in email) and email != 'rstewart16@kentdenver.org' and email != 'slevy16@kentdenver.org':
+            if any(char.isdigit() for char in email) and email != 'slevy16@kentdenver.org':
                 raise web.seeother('http://www.beesbeesbees.com')
             print 'error'
 
-
-        postsdb = db.posts.find().sort('myid' , pymongo.DESCENDING)
         posts = []
+
+        postsdb = db.posts.find({'sticky':{'on'}}).sort('myid' , pymongo.DESCENDING)
         for post in postsdb:
             commentsdb = db.comments.find()
             carr = []
@@ -172,6 +173,18 @@ class admin:
                     carr.append(c)
             p = Post(post.get('name') , post.get('text') , post.get('pic') , carr , post.get('myid'))
             posts.append(p)
+
+        postsdb = db.posts.find({'sticky':{'off'}}).sort('myid' , pymongo.DESCENDING)
+        for post in postsdb:
+            commentsdb = db.comments.find()
+            carr = []
+            for comment in commentsdb:
+                if int(comment.get('referenceid')) == int(post.get('myid')):
+                    c = Comment(comment.get('name') , comment.get('text') , comment.get('referenceid'))
+                    carr.append(c)
+            p = Post(post.get('name') , post.get('text') , post.get('pic') , carr , post.get('myid'))
+            posts.append(p)
+
         web.header('X-Frame-Options' , 'ALLOW-FROM *')
         return render.admin(posts , name , pic , email)
     #sees if a comment or post was submitted and handles it
@@ -181,7 +194,10 @@ class admin:
         name = form.name
         email = form.email
         pic = form.pic
-        sticky = form.sticky
+        try:
+            sticky = form.sticky
+        except AttributeError:
+            sticky = 'off'
         print 'sticky: ' + str(form.sticky)
         try:
             post = form.writepost
@@ -263,7 +279,7 @@ class launch:
             #return render.index()
 
 
-            if any(char.isdigit() for char in email) and email != 'rstewart16@kentdenver.org' and email != 'slevy16@kentdenver.org':
+            if any(char.isdigit() for char in email) and email != 'slevy16@kentdenver.org':
                 query = '/?name=' + str(name) + '&email=' + str(email) + "&pic=" + str(pic)
                 print query
                 raise web.seeother(query)

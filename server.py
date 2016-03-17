@@ -171,7 +171,7 @@ class admin:
             print error
             raise web.seeother('http://www.beesbeesbees.com')
         except AttributeError:
-            if any(char.isdigit() for char in email) and email != 'slevy16@kentdenver.org' and email != 'rstewart16@kentdenver.org' or email = 'aclement@kentdenver.org':
+            if any(char.isdigit() for char in email) and email != 'slevy16@kentdenver.org' and email != 'rstewart16@kentdenver.org' or email == 'aclement@kentdenver.org':
                 raise web.seeother('http://www.beesbeesbees.com')
             print 'error'
 

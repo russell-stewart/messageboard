@@ -213,7 +213,7 @@ class admin:
             print 'myid:'
             myid = form.deleteid
             print myid
-            result = db.posts.delete_many({'myid':myid})
+            result = db.posts.delete_many({'myid':int(myid)})
         except AttributeError:
             print 'delete post error'
         try:

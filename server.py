@@ -31,7 +31,8 @@ urls = (
 app = web.application(urls, globals(), True)
 
 class Bees:
-    return render.bees()
+    def GET(self):
+        return render.bees()
 
 #a class for organizing posts
 class Post:

@@ -88,8 +88,9 @@ class index:
             print 'error'
 
 
-        postsdb = db.posts.find().sort('myid' , pymongo.DESCENDING)
         posts = []
+
+        postsdb = db.posts.find({'sticky':'on'}).sort('myid' , pymongo.DESCENDING)
         for post in postsdb:
             commentsdb = db.comments.find()
             carr = []
@@ -99,8 +100,20 @@ class index:
                     carr.append(c)
             p = Post(post.get('name') , post.get('text') , post.get('pic') , carr , post.get('myid'))
             posts.append(p)
+
+        postsdb = db.posts.find({'sticky':'off'}).sort('myid' , pymongo.DESCENDING)
+        for post in postsdb:
+            commentsdb = db.comments.find()
+            carr = []
+            for comment in commentsdb:
+                if int(comment.get('referenceid')) == int(post.get('myid')):
+                    c = Comment(comment.get('name') , comment.get('text') , comment.get('referenceid'))
+                    carr.append(c)
+            p = Post(post.get('name') , post.get('text') , post.get('pic') , carr , post.get('myid'))
+            posts.append(p)
+
         web.header('X-Frame-Options' , 'ALLOW-FROM *')
-        return render.index(posts , name , pic , email)
+        return render.admin(posts , name , pic , email)
     #sees if a comment or post was submitted and handles it
     def POST(self):
         form = web.input()

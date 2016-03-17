@@ -272,6 +272,8 @@ $def with(posts , name , pic , email)
         <img class = 'profilepic' src = '$post.pic'></img>
         <form method = 'POST' enctype="multipart/form-data" action="" name = 'delete$post' id = 'delete$post'>
         <div class = 'name'>
+          $if post.sticky == 'on':
+            ⭐️
           $post.name
           <input type = 'text' style = 'display:none' name = 'name'  value = '$name'></input>
           <input type = 'text' style = 'display:none' name = 'pic'  value = '$pic'></input>

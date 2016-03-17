@@ -252,7 +252,11 @@ $def with(posts , name , pic , email)
     $for post in posts:
       <div class = 'post'>
         <img class = 'profilepic' src = '$post.pic'></img>
-        <div class = 'name'>$post.name</div>
+        <div class = 'name'>
+          $if post.sticky == 'on':
+            ⭐️
+          $post.name
+        </div>
         <div class = 'text'>$post.text</div>
         <div id = 'comments$post' style = 'display:none'>
           $for comment in post.comments:

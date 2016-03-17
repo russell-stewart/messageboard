@@ -210,8 +210,9 @@ class admin:
         except AttributeError:
             print 'error'
         try:
+            print 'myid:'
             myid = form.deleteid
-
+            print myid
             result = db.posts.delete_one({'myid':myid})
         except AttributeError:
             print 'error'

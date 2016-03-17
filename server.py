@@ -163,7 +163,7 @@ class admin:
 
         posts = []
 
-        postsdb = db.posts.find({'sticky':{'on'}}).sort('myid' , pymongo.DESCENDING)
+        postsdb = db.posts.find({'sticky':'on'}).sort('myid' , pymongo.DESCENDING)
         for post in postsdb:
             commentsdb = db.comments.find()
             carr = []
@@ -174,7 +174,7 @@ class admin:
             p = Post(post.get('name') , post.get('text') , post.get('pic') , carr , post.get('myid'))
             posts.append(p)
 
-        postsdb = db.posts.find({'sticky':{'off'}}).sort('myid' , pymongo.DESCENDING)
+        postsdb = db.posts.find({'sticky':'off'}).sort('myid' , pymongo.DESCENDING)
         for post in postsdb:
             commentsdb = db.comments.find()
             carr = []

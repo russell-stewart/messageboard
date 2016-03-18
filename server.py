@@ -176,7 +176,7 @@ class admin:
             print error
             raise web.seeother('/bees')
         except AttributeError:
-            if any(char.isdigit() for char in email) and email != 'slevy16@kentdenver.org' and email != 'rstewart16@kentdenver.org' or email == 'aclement@kentdenver.org':
+            if any(char.isdigit() for char in email) and email != 'slevy16@kentdenver.org' and email != 'rstewart16@kentdenver.org':
                 raise web.seeother('/bees')
             print 'error'
 
@@ -297,7 +297,7 @@ class launch:
             #return render.index()
 
 
-            if any(char.isdigit() for char in email) and email != 'slevy16@kentdenver.org'  and email != 'rstewart16@kentdenver.org':
+            if any(char.isdigit() for char in email) and email != 'slevy16@kentdenver.org'  and email != 'rstewart16@kentdenver.org' or email == 'aclement@kentdenver.org':
                 query = '/?name=' + str(name) + '&email=' + str(email) + "&pic=" + str(pic)
                 print query
                 raise web.seeother(query)
